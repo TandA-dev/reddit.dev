@@ -11,41 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@showWelcome');
 
-Route::get('/increment/{number}', function ($number) {
-    $data = ['number' => ($number + 1)];
-    return view('increment', $data);
-});
+Route::get('/increment/{number?}', 'HomeController@increment');
 
-Route::get('/uppercase/{name}', function($name)
-{
-    if ($name == "Chris") {
-        return redirect('/');
-    }
-    $nameUpCase = strtoupper($name);
-    $data = ['name' => $nameUpCase, 'original' => $name];
-    return view('uppercase', $data);
-});
+Route::get('/decrement/{number?}', 'HomeController@decrement');
 
-Route::get('/add/{number}/{number2}', function($number, $number2) {
-    return $number + $number2;
-});
+Route::get('/uppercase/{name}', 'HomeController@uppercase');
 
-Route::get('/sayhello/{name}', function($name)
-{
-  $data = array('name' => $name);
-    return view('my-first-view', $data);
-});
+Route::get('/add/{number}/{number2}', 'HomeController@add');
 
-Route::get('/rolldice/{guess}', function($guess) {
-  $diceRoll = mt_rand(1,6);
-  if($diceRoll == $guess) {
-    header('Location: http://youtube.com');
-    exit;
-  }
-  $data = array('diceRoll' => $diceRoll, 'guess' => $guess);
-  return view('roll-dice', $data);
-});
+Route::get('/sayhello/{name}', 'HomeController@hello');
+
+Route::get('/rolldice/{guess}', 'HomeController@roll');
