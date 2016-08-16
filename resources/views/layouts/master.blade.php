@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>My First View</title>
+    <title>Reddit</title>
 </head>
 <body>
-    <h1>Hello, <?= $name; ?>!</h1>
+    @yield('content')
 </body>
 </html>

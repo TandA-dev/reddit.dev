@@ -15,13 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/increment/{number}', function ($number) {
+    $data = ['number' => ($number + 1)];
+    return view('increment', $data);
+});
+
 Route::get('/uppercase/{name}', function($name)
 {
     if ($name == "Chris") {
         return redirect('/');
     }
     $nameUpCase = strtoupper($name);
-    return "Hello, $nameUpCase!";
+    $data = ['name' => $nameUpCase, 'original' => $name];
+    return view('uppercase', $data);
 });
 
 Route::get('/add/{number}/{number2}', function($number, $number2) {
