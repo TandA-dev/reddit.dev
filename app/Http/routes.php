@@ -30,5 +30,16 @@ Route::get('/add/{number}/{number2}', function($number, $number2) {
 
 Route::get('/sayhello/{name}', function($name)
 {
-    return view('my-first-view');
+  $data = array('name' => $name);
+    return view('my-first-view', $data);
+});
+
+Route::get('/rolldice/{guess}', function($guess) {
+  $diceRoll = mt_rand(1,6);
+  if($diceRoll == $guess) {
+    header('Location: http://youtube.com');
+    exit;
+  }
+  $data = array('diceRoll' => $diceRoll, 'guess' => $guess);
+  return view('roll-dice', $data);
 });
