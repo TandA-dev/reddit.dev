@@ -24,3 +24,5 @@ Route::get('/add/{number}/{number2}', 'HomeController@add');
 Route::get('/sayhello/{name}', 'HomeController@hello');
 
 Route::get('/rolldice/{guess}', 'HomeController@roll');
+
+Route::resource('posts', 'PostsController');
