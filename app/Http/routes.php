@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -26,3 +25,11 @@ Route::get('/sayhello/{name}', 'HomeController@hello');
 Route::get('/rolldice/{guess}', 'HomeController@roll');
 
 Route::resource('posts', 'PostsController');
+
+Route::get('orm-test', function ()
+{
+    // test code here
+    $post = \App\Post::all();
+    return $post;
+
+});

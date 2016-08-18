@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Post;
 
 class PostsController extends Controller
 {
@@ -16,8 +17,9 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //
-        return "All posts";
+      $posts = Post::all();
+      $data = ['posts' => $posts];
+      return view('/posts/index', $data);
     }
 
     /**
@@ -39,8 +41,13 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return back()->withInput();
+        $post1 = new Post();
+        $post1->title = $request->input('title');
+        $post1->url= $request->input('url');
+        $post1->content= $request->input('content');
+        $post1->created_by = 1;
+        $post1->save();
+        return redirect()->action('PostsController@index');
     }
 
     /**
@@ -52,7 +59,9 @@ class PostsController extends Controller
     public function show($id)
     {
         //
-        return "Show post id";
+        $post = Post::find($id);
+        $data = ['post' => $post];
+        return view("/posts/show", $data);
     }
 
     /**
