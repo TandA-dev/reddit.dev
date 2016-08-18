@@ -17,9 +17,9 @@ class PostsController extends Controller
      */
     public function index()
     {
-      $posts = Post::all();
-      $data = ['posts' => $posts];
-      return view('/posts/index', $data);
+      $posts = Post::paginate(4);
+
+      return view('posts/index')->with(array('posts' => $posts));
     }
 
     /**
@@ -41,13 +41,18 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        $post1 = new Post();
-        $post1->title = $request->input('title');
-        $post1->url= $request->input('url');
-        $post1->content= $request->input('content');
-        $post1->created_by = 1;
-        $post1->save();
-        return redirect()->action('PostsController@index');
+
+      $this->validate($request, Post::$rules);
+
+      $post1 = new Post();
+      $post1->title = $request->input('title');
+      $post1->url= $request->input('url');
+      $post1->content= $request->input('content');
+      $post1->created_by = 1;
+      $post1->save();
+      $message = 'You created a new entry!';
+      $request->session()->flash('successMessage', $message);
+      return redirect()->action('PostsController@index');
     }
 
     /**
@@ -73,6 +78,8 @@ class PostsController extends Controller
     public function edit($id)
     {
         //
+        $message = 'You successfully made your edits!';
+        $request->session()->flash('successMessage', $message);
         return "Edit";
     }
 
@@ -86,6 +93,10 @@ class PostsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, Post::$rules);
+
+        $message = 'You updated your entry!';
+        $request->session()->flash('successMessage', $message);
         return "Update";
     }
 
