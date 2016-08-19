@@ -52,6 +52,7 @@ class PostsController extends Controller
       $post1->save();
       $message = 'You created a new entry!';
       $request->session()->flash('successMessage', $message);
+      // Log::info("Created new post titled {$post->title}");
       return redirect()->action('PostsController@index');
     }
 
@@ -65,6 +66,9 @@ class PostsController extends Controller
     {
         //
         $post = Post::find($id);
+        if($post == NULL) {
+          abort(404);
+        }
         $data = ['post' => $post];
         return view("/posts/show", $data);
     }
@@ -75,12 +79,17 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         //
-        $message = 'You successfully made your edits!';
-        $request->session()->flash('successMessage', $message);
-        return "Edit";
+        $post = Post::find($id);
+        if($post == NULL) {
+          abort(404);
+        }
+        $data = ['post' => $post];
+        // $message = 'You successfully made your edits!';
+        // $request->session()->flash('successMessage', $message);
+        return view("/posts/edit", $data);
     }
 
     /**
@@ -93,11 +102,21 @@ class PostsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $post = Post::find($id);
+        if($post == NULL) {
+          abort(404);
+        }
+
         $this->validate($request, Post::$rules);
 
+        $post->title = $request->input('title');
+        $post->url= $request->input('url');
+        $post->content= $request->input('content');
+        $post->save();
         $message = 'You updated your entry!';
         $request->session()->flash('successMessage', $message);
-        return "Update";
+        // Log::info("Updated post number {$post->id} with title {$post->title}");
+        return redirect()->action('PostsController@index');
     }
 
     /**
@@ -106,9 +125,17 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         //
-        return "Delete";
+        $post = Post::find($id);
+        if($post == NULL) {
+          abort(404);
+        }
+        $post->delete();
+        $message = 'You deleted your entry!';
+        $request->session()->flash('successMessage', $message);
+        // Log::info("Updated post number {$post->id} with title {$post->title}");
+        return redirect()->action('PostsController@index');
     }
 }
