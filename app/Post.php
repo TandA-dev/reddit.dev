@@ -13,4 +13,8 @@ class Post extends Model
       'title' => 'required|max:100',
       'url'   => 'required|active_url'
     ];
+
+    // public function user(){
+    //   return $this->belongsTo('App\User' 'created_by', 'id');
+    // }
 }
