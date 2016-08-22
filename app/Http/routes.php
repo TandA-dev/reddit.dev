@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,16 +10,26 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', 'HomeController@showWelcome');
 
+Route::get('/increment/{number?}', 'HomeController@increment');
 
-Route::get('/uppercase/{name}', function($name)
+Route::get('/decrement/{number?}', 'HomeController@decrement');
+
+Route::get('/uppercase/{name}', 'HomeController@uppercase');
+
+Route::get('/add/{number}/{number2}', 'HomeController@add');
+
+Route::get('/sayhello/{name}', 'HomeController@hello');
+
+Route::get('/rolldice/{guess}', 'HomeController@roll');
+
+Route::resource('posts', 'PostsController');
+
+Route::get('orm-test', function ()
 {
-	if ($name === 'Tyler'){
-		return redirect('/');
-	}
-    return "Hello, $name!";
-});
+    // test code here
+    $post = \App\Post::all();
+    return $post;
 
+});
