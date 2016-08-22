@@ -30,10 +30,12 @@ class AuthController extends Controller
      */
 
     protected $redirectPath = '/posts';
+
     public function __construct()
-    {
-        $this->middleware('guest', ['except' => 'getLogout']);
-    }
+   {
+       $this->middleware('guest', ['except' => 'getLogout']);
+   }
+
 
     /**
      * Get a validator for an incoming registration request.
