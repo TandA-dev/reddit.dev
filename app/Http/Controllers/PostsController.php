@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Post;
 
@@ -15,6 +16,11 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+ {
+     $this->middleware('auth');
+ }
     public function index()
     {
       $posts = Post::paginate(4);
@@ -48,7 +54,7 @@ class PostsController extends Controller
       $post1->title = $request->input('title');
       $post1->url= $request->input('url');
       $post1->content= $request->input('content');
-      $post1->created_by = 1;
+      $post1->created_by=Auth::user()->id;
       $post1->save();
       $message = 'You created a new entry!';
       $request->session()->flash('successMessage', $message);
