@@ -14,6 +14,17 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+        $users = [
+            ['email'=>'anthony@codeup.com', 'name'=>'Anthony', 'password'=>'Anthony'],
+            ['email'=>'tyler@codeup.com', 'name'=>'Tyler', 'password'=>'Tyler'],
+        ];
+        foreach($users as $user){
+            $user1 = new App\User();
+            $user1->email = $user['email'];
+            $user1->name = $user['name'];
+            $user1->password = Hash::make($user['password']);
+            $user1->save();
+        }
 
       factory(App\User::class, 50)->create();
 

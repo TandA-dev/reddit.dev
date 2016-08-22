@@ -17,6 +17,7 @@ class CreatePostsTable extends Migration
             $table->string('title', 75);
             $table->string('url', 100);
             $table->longtext('content');
+            $table->string('img', 100);
             $table->integer('created_by')->unsigned();
             $table->foreign('created_by')->references('id')->on('users');
             $table->softDeletes();
