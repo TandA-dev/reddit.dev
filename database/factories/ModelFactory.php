@@ -25,6 +25,7 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
     'title' => $faker->words(5, true),
     'url' => $faker->url,
     'content' => $faker->sentence(),
+    'img' => $faker->imageUrl($width = 640, $height = 480), // 'http://lorempixel.com/640/480/'
     'created_by' => App\User::all()->random()->id
   ];
 });

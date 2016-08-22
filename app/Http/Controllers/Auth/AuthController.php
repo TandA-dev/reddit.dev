@@ -30,6 +30,7 @@ class AuthController extends Controller
      */
 
     protected $redirectPath = '/posts';
+    protected $loginPath = '/login';
 
     public function __construct()
    {

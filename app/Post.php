@@ -14,6 +14,10 @@ class Post extends Model
       'url'   => 'required|active_url'
     ];
 
+    public function user()
+   {
+       return $this->belongsTo('App\User', 'created_by', 'id');
+   }
     // public function user(){
     //   return $this->belongsTo('App\User' 'created_by', 'id');
     // }

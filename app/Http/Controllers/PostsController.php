@@ -23,9 +23,9 @@ class PostsController extends Controller
 
     public function index()
     {
-      $posts = Post::paginate(4);
-
-      return view('posts/index')->with(array('posts' => $posts));
+      $loggedInUser=Auth::user();
+      $posts = Post::paginate(6);
+      return view('posts/index')->with(array('posts' => $posts, 'loggedInUser' => $loggedInUser));
     }
 
     /**
@@ -47,14 +47,14 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-
+      $loggedInUser = Auth::user();
       $this->validate($request, Post::$rules);
 
       $post1 = new Post();
       $post1->title = $request->input('title');
       $post1->url= $request->input('url');
       $post1->content= $request->input('content');
-      $post1->created_by=Auth::user()->id;
+      $post1->created_by=$loggedInUser;
       $post1->save();
       $message = 'You created a new entry!';
       $request->session()->flash('successMessage', $message);
