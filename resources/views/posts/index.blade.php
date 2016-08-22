@@ -23,6 +23,7 @@
         <p class="card-text content">{{ $post->content }}</p>
         <p class="card-text url"><small class="text-muted">{{ $post->url }}</small></p>
         <p class="card-text time"><small class="text-muted">{{ $post->created_at->setTimezone('America/Chicago')->format('l, F jS Y @ h:i:s A') }}</small></p>
+        <p class="card-text content">Created by user #{{ $post->created_by }}</p>
         <a href="{{ action('PostsController@edit', $post->id)}}">Edit</a>
         <button type="submit" name="delete">Delete</button>
         </form>
