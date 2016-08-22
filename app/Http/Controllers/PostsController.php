@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Post;
@@ -15,11 +15,17 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct() 
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-      $posts = Post::paginate(4);
+        $posts = Post::paginate(6);
+        $loggedInUser = Auth::user();
 
-      return view('posts/index')->with(array('posts' => $posts));
+        return view('posts/index')->with(array('posts' => $posts));
     }
 
     /**
@@ -41,14 +47,14 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-
+        $loggedInUser = Auth::user();
       $this->validate($request, Post::$rules);
 
       $post1 = new Post();
       $post1->title = $request->input('title');
       $post1->url= $request->input('url');
       $post1->content= $request->input('content');
-      $post1->created_by = 1;
+      $post1->created_by = $loggedInUser;
       $post1->save();
       $message = 'You created a new entry!';
       $request->session()->flash('successMessage', $message);
