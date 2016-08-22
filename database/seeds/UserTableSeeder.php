@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\User;
 class UserTableSeeder extends Seeder
 {
     /**
@@ -31,7 +31,7 @@ class UserTableSeeder extends Seeder
         // $user1->name = $user['name'];
         // $user1->password = Hash::make($user['password']);
         // $user1->save();
-        User::create();
+        User::create($user);
       }
 
     }
