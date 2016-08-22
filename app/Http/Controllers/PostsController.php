@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Post;
@@ -15,11 +15,17 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct() 
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-      $posts = Post::paginate(4);
+        Auth::logout();
+        $posts = Post::paginate(4);
 
-      return view('posts/index')->with(array('posts' => $posts));
+        return view('posts/index')->with(array('posts' => $posts));
     }
 
     /**
