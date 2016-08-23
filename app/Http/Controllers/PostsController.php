@@ -24,7 +24,7 @@ class PostsController extends Controller
 
 
     public function index(){
-        $posts = Post::paginate(6);
+        $posts = Post::orderedView()->paginate(3);
         $loggedInUser = Auth::user();
 
         return view('posts/index')->with(array('posts' => $posts));
@@ -59,18 +59,29 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id){
-        $post = Post::find($id);
-        if($post == NULL) {
+        $user = User::find($id);
+        if($user == NULL) {
           abort(404);
-        }
-        $data = ['post' => $post];
-        return view("/posts/show", $data);
+        };
+        $posts = User::find($id)->posts;
+        return view("/posts/show")->with(array('posts' => $posts));
     }
 
     public function account(){
       $loggedInUser = Auth::user();
       $posts = User::find($loggedInUser->id)->posts;
        return view("/posts/account")->with(array('posts' => $posts));
+    }
+
+    public function search(Request $request){
+      if($request->option == 'name'){
+        $users = User::user($request->search);
+        return view('/posts/search_name')->with(array('users' => $users));
+
+      } elseif($request->option == 'title'){
+          $posts = Post::searchTitle($request->search)->paginate(6);
+          return view('/posts/search_title')->with(array('posts' => $posts));
+      }
     }
     /**
      * Show the form for editing the specified resource.

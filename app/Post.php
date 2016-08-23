@@ -18,4 +18,12 @@ class Post extends Model
     public function user(){
       return $this->belongsTo(User::class, 'created_by');
     }
+
+    public static function searchTitle($title){
+      return Post::where('title', 'LIKE', "%{$title}%");
+    }
+
+    public static function orderedView(){
+      return Post::orderBy('created_at', "desc");
+    }
 }

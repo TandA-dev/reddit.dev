@@ -46,9 +46,13 @@
             </li>
           </ul>
           <div class="collapse nav navbar-nav nav-collapse" id="nav-collapse3">
-            <form class="navbar-form navbar-right" role="search">
+            <form class="navbar-form navbar-right" role="search" action="{{ action('PostsController@search') }}">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search" />
+                <select class="option" name="option">
+                    <option value="name">Name</option>
+                    <option value="title">Post Title</option>
+                </select>
+                <input type="text" class="form-control" placeholder="Search" name="search" />
               </div>
               <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
             </form>
