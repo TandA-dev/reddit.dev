@@ -25,6 +25,4 @@
       @endforeach
     </div>
 
-  {!! $posts->render() !!}
-
 @stop

@@ -3,6 +3,7 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory;
+
 use App\User;
 
 class UserTableSeeder extends Seeder
@@ -50,6 +51,8 @@ class UserTableSeeder extends Seeder
     //     $user1->save();
     //     // User::create($user);
     //   }
+
+      factory(App\User::class, 50)->create();
 
     }
 }

@@ -14,7 +14,8 @@ class Post extends Model
       'url'   => 'required|active_url'
     ];
 
+    // SELECT  * FROM users WHERE id = $post->created_by;
     public function user(){
-      return $this->belongsTo('App\User', 'created_by', 'id');
+      return $this->belongsTo(User::class, 'created_by');
     }
 }
