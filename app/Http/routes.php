@@ -24,7 +24,11 @@ Route::get('/sayhello/{name}', 'HomeController@hello');
 
 Route::get('/rolldice/{guess}', 'HomeController@roll');
 
+Route::get('/posts/account', 'PostsController@account');
+
 Route::resource('posts', 'PostsController');
+
+
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

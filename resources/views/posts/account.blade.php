@@ -2,7 +2,7 @@
 
 @section('content')
 
-  <div class="card-columns">
+<div class="card-columns">
     @foreach ($posts as $post)
     <div class="card">
       <form class="" action="{{ action('PostsController@destroy', $post->id)}}" method="post">
@@ -23,6 +23,5 @@
       @endforeach
     </div>
 
-  {!! $posts->render() !!}
 
 @stop

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
@@ -63,6 +64,13 @@ class PostsController extends Controller
         }
         $data = ['post' => $post];
         return view("/posts/show", $data);
+    }
+
+    public function account(){
+        $loggedInUser = Auth::user();
+        $posts = User::find($loggedInUser->id)->posts;
+        return view('/posts/account')->with(array('posts' => $posts));
+
     }
 
     /**
