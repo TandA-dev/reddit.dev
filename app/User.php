@@ -40,4 +40,8 @@ class User extends Model implements AuthenticatableContract,
     public function posts() {
         return $this->hasMany(Post::class, 'created_by');
     }
+
+    public static function user($user){
+      return User::where('name', 'LIKE', "%{$user}%")->get();
+    }
 }
