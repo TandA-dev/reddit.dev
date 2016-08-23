@@ -15,13 +15,14 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
+
+    public function __construct() {
         $this->middleware('auth');
     }
 
-    public function index()
-    {
+
+
+    public function index(){
         $posts = Post::paginate(6);
         $loggedInUser = Auth::user();
 
@@ -33,9 +34,7 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(){
         return view('/posts/create');
     }
 
@@ -45,21 +44,11 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $loggedInUser = Auth::user();
-      $this->validate($request, Post::$rules);
-
-      $post1 = new Post();
-      $post1->title = $request->input('title');
-      $post1->url= $request->input('url');
-      $post1->content= $request->input('content');
-      $post1->created_by = $loggedInUser;
-      $post1->save();
-      $message = 'You created a new entry!';
-      $request->session()->flash('successMessage', $message);
-      // Log::info("Created new post titled {$post->title}");
-      return redirect()->action('PostsController@index');
+        $post = new Post();
+        $post->created_by = 1; // leave created_by here and not in validateAndSave - you don't want to allow a user to change the created_by column
+        return $this->validateAndSave($post, $request);
     }
 
     /**
@@ -68,9 +57,7 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($id){
         $post = Post::find($id);
         if($post == NULL) {
           abort(404);
@@ -85,12 +72,10 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
-    {
-        //
+    public function edit(Request $request, $id){
         $post = Post::find($id);
         if($post == NULL) {
-          abort(404);
+            abort(404);
         }
         $data = ['post' => $post];
         // $message = 'You successfully made your edits!';
@@ -105,24 +90,9 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id){
         $post = Post::find($id);
-        if($post == NULL) {
-          abort(404);
-        }
-
-        $this->validate($request, Post::$rules);
-
-        $post->title = $request->input('title');
-        $post->url= $request->input('url');
-        $post->content= $request->input('content');
-        $post->save();
-        $message = 'You updated your entry!';
-        $request->session()->flash('successMessage', $message);
-        // Log::info("Updated post number {$post->id} with title {$post->title}");
-        return redirect()->action('PostsController@index');
+        return $this->validateAndSave($post, $request); //send to method below
     }
 
     /**
@@ -131,8 +101,27 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
-    {
+
+    private function validateAndSave(Post $post, Request $request){
+        $request->session()->flash('ERROR_MESSAGE', 'Post was not saved successfully'); //set error message if not saved
+        $this->validate($request, Post::$rules); //validate that alll fields are filled out correctly
+        $request->session()->forget('ERROR_MESSAGE'); // if validated, tell to forget the error message
+        if(!$post){
+            abort('404'); // send to custom 404 page if not post is not found
+        }
+        $post->title = $request->title; //can use $post->title = $request->input('title') alternatively
+        $post->url = $request->url;
+        $post->content = $request->content;
+        $post->save(); //save when submited
+        // Log::info('User successfully creates post', $request->all()); // create custom log when post is created
+        $request->session()->flash('message', 'Post was saved successfully'); // flash success message when saved
+        return redirect()->action('PostsController@index'); //redirect to the index page
+    }
+
+
+
+
+    public function destroy(Request $request, $id){
         //
         $post = Post::find($id);
         if($post == NULL) {
