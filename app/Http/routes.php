@@ -26,6 +26,8 @@ Route::get('/rolldice/{guess}', 'HomeController@roll');
 
 Route::get('/posts/account', 'PostsController@account');
 
+
+
 Route::resource('posts', 'PostsController');
 
 

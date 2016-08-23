@@ -4,12 +4,12 @@
 
   <div class="card-columns">
     @foreach ($posts as $post)
+
     <div class="card">
       <form class="" action="{{ action('PostsController@destroy', $post->id)}}" method="post">
 
       {!! csrf_field() !!}
       {{ method_field('DELETE') }}
-
       <h4 class="card-title title">{{ $post->title }}</h4>
         <img class="card-img-top" src="{{ $post->img }}" alt="Card image cap">
         <div class="card-block">

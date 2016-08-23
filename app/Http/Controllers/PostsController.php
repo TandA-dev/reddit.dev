@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\User;
 
 class PostsController extends Controller
 {
@@ -16,6 +17,7 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function __construct() {
         $this->middleware('auth');
     }
@@ -67,12 +69,12 @@ class PostsController extends Controller
     }
 
     public function account(){
-        $loggedInUser = Auth::user();
-        $posts = User::find($loggedInUser->id)->posts;
-        return view('/posts/account')->with(array('posts' => $posts));
+      $loggedInUser = Auth::user();
+  
 
+      $posts = User::find($loggedInUser->id)->posts;
+       return view("/posts/account")->with(array('posts' => $posts));
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -119,7 +121,7 @@ class PostsController extends Controller
         $post->title = $request->title; //can use $post->title = $request->input('title') alternatively
         $post->url = $request->url;
         $post->content = $request->content;
-        $post->save(); //save when submited 
+        $post->save(); //save when submited
         // Log::info('User successfully creates post', $request->all()); // create custom log when post is created
         $request->session()->flash('message', 'Post was saved successfully'); // flash success message when saved
         return redirect()->action('PostsController@index'); //redirect to the index page
