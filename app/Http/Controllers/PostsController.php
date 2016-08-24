@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Vote;
 
 class PostsController extends Controller
 {
@@ -25,9 +26,11 @@ class PostsController extends Controller
 
     public function index(){
         $posts = Post::orderedView()->paginate(3);
+        $votesUp = Vote::votesUp();
+        $votesDown = Vote::votesDown();
         $loggedInUser = Auth::user();
 
-        return view('posts/index')->with(array('posts' => $posts));
+        return view('posts/index')->with(array('posts' => $posts, 'votesUp' => $votesUp, 'votesDown' => $votesDown));
     }
 
     /**
