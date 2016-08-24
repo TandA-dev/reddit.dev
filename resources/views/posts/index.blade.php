@@ -13,7 +13,7 @@
           <form method="POST" action="{{ action('PostsController@index' )}}">
           {!! csrf_field() !!}
             <button type="submit" class="btn btn-success" value="up" name="vote"><span>{{ $post->positive_votes }}</span> UP</button>
-            <button type="submit" class="btn btn-warning" value="down" name="vote"><span>{{ $post->negative_votes }}</span> DOWN</button>
+            <button type="submit" class="btn btn-danger" value="down" name="vote"><span>{{ $post->negative_votes }}</span> DOWN</button>
           </form>
           <p class="card-text url"><small class="text-muted">{{ $post->url }}</small></p>
           <p class="card-text time"><small class="text-muted">{{ $post->created_at->setTimezone('America/Chicago')->format('l, F jS Y @ h:i:s A') }}</small></p>
