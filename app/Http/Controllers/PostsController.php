@@ -22,15 +22,11 @@ class PostsController extends Controller
         $this->middleware('auth');
     }
 
-
-
     public function index(){
-        $posts = Post::orderedView()->paginate(3);
-        $votesUp = Vote::votesUp();
-        $votesDown = Vote::votesDown();
+        $posts = Post::withVotes();
         $loggedInUser = Auth::user();
 
-        return view('posts/index')->with(array('posts' => $posts, 'votesUp' => $votesUp, 'votesDown' => $votesDown));
+        return view('posts/index')->with(array('posts' => $posts));
     }
 
     /**
