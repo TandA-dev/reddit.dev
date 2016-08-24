@@ -41,6 +41,10 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany(Post::class, 'created_by');
     }
 
+    public function votes() {
+        return $this->hasMany(Vote::class);
+    }
+
     public static function user($user){
       return User::where('name', 'LIKE', "%{$user}%")->get();
     }
