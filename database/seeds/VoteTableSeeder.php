@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory;
-
 class VoteTableSeeder extends Seeder
 {
     /**

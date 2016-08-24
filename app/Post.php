@@ -19,8 +19,8 @@ class Post extends Model
       return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function votes(){
-      return $this->hasMany(Vote::class, 'post_id');
+    public function votes() {
+        return $this->hasMany(Vote::class, 'post_id');
     }
 
     public static function searchTitle($title){
