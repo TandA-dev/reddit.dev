@@ -48,7 +48,7 @@ class PostsController extends Controller
     public function store(Request $request){
         $loggedInUser = Auth::user();
         $post = new Post();
-        $post->$loggedInUser->id; // leave created_by here and not in validateAndSave - you don't want to allow a user to change the created_by column
+        $post->created_by = $loggedInUser->id; // leave created_by here and not in validateAndSave - you don't want to allow a user to change the created_by column
         return $this->validateAndSave($post, $request);
     }
 
