@@ -2,7 +2,7 @@
 
 @section('content')
 
-  <div class="card-columns">
+<div class="card-columns">
     @foreach ($posts as $post)
 
     <div class="card">
@@ -10,6 +10,7 @@
 
       {!! csrf_field() !!}
       {{ method_field('DELETE') }}
+
       <h4 class="card-title title">{{ $post->title }}</h4>
         <img class="card-img-top" src="{{ $post->img }}" alt="Card image cap">
         <div class="card-block">
@@ -26,3 +27,4 @@
     </div>
 
 @stop
+
