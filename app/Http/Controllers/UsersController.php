@@ -61,7 +61,14 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        if($user == NULL) {
+            abort(404);
+        }
+        $data = ['user' => $user];
+        // $message = 'You successfully made your edits!';
+        // $request->session()->flash('successMessage', $message);
+        return view("/users/edit_user", $data);
     }
 
     /**
@@ -100,6 +107,6 @@ class UsersController extends Controller
         $user->save(); //save when submited
         // Log::info('User successfully creates post', $request->all()); // create custom log when post is created
         $request->session()->flash('message', 'User was saved successfully'); // flash success message when saved
-        return redirect()->action('PostsController@index'); //redirect to the index page
+        return redirect()->action('PostsController@account'); //redirect to the index page
     }
 }

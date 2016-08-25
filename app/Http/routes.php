@@ -31,6 +31,8 @@ Route::get('posts/search_name', 'PostsController@search');
 Route::get('posts/search_title', 'PostsController@search');
 Route::get('posts/show', 'PostsController@show');
 
+Route::resource('users', 'UsersController');
+
 Route::resource('posts', 'PostsController');
 
 // Authentication routes...
