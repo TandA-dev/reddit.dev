@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Post;
-use App\Vote;
 use App\User;
+use App\Vote;
+
+
 
 class VotesController extends Controller
 {
@@ -40,13 +43,21 @@ class VotesController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
+=======
+        //
+>>>>>>> f673b9845c95dbc2a4d1c2aafab0abc79c6cc2ee
         $loggedInUser = Auth::user();
         $postToUpdate = Vote::firstOrCreate(array('user_id' => $loggedInUser->id, 'post_id' => $request->input('post_id'), 'vote' => $request->input('vote')));
 
         $postToUpdate->vote = $request->input('vote');
         $postToUpdate->save();
 
+<<<<<<< HEAD
         return redirect()->action('PostsController@index');
+=======
+        return redirect()->action('PostsController@index'); //redirect to the index page
+>>>>>>> f673b9845c95dbc2a4d1c2aafab0abc79c6cc2ee
     }
 
     /**
@@ -68,7 +79,11 @@ class VotesController extends Controller
      */
     public function edit($id)
     {
+<<<<<<< HEAD
         
+=======
+        //
+>>>>>>> f673b9845c95dbc2a4d1c2aafab0abc79c6cc2ee
     }
 
     /**
@@ -80,7 +95,12 @@ class VotesController extends Controller
      */
     public function update(Request $request, $id)
     {
+<<<<<<< HEAD
         
+=======
+        //
+
+>>>>>>> f673b9845c95dbc2a4d1c2aafab0abc79c6cc2ee
     }
 
     /**
