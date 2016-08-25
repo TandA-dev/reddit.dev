@@ -48,4 +48,10 @@ class User extends Model implements AuthenticatableContract,
     public static function user($user){
       return User::where('name', 'LIKE', "%{$user}%")->get();
     }
+    public static $rules = [
+      'name' => 'required|max:100',
+      'email' => 'required|email',
+      'password' => 'required|max:100',
+    ];
 }
+
