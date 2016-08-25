@@ -37,7 +37,16 @@ class VotesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $loggedInUser = Auth::user();
+        $vote = new Vote();
+        // $request->input('name') == 'up') {
+        //     $vote->vote += 1;
+        // }
+        // if ($request->input('name') == 'down') {
+        //     $vote->vote += 1;
+        // }
+        
+        $vote->id = $loggedInUser->id;
     }
 
     /**
@@ -59,7 +68,7 @@ class VotesController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**

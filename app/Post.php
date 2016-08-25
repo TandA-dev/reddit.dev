@@ -21,7 +21,7 @@ class Post extends Model
     }
 
     public function votes() {
-        return $this->hasMany(Vote::class, 'post_id');
+        return $this->hasMany(Vote::class);
     }
 
     public static function searchTitle($title){
