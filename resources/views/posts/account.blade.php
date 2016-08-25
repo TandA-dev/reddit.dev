@@ -2,9 +2,10 @@
 
 @section('content')
 
+<a href="{{ action('UsersController@edit', $loggedInUser->id )}}">Edit User Info</a>
+
 <div class="card-columns">
     @foreach ($posts as $post)
-
     <div class="card">
       <form class="" action="{{ action('PostsController@destroy', $post->id)}}" method="post">
 
@@ -27,4 +28,3 @@
     </div>
 
 @stop
-
