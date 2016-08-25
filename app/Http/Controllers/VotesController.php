@@ -40,6 +40,13 @@ class VotesController extends Controller
      */
     public function store(Request $request)
     {
+        $loggedInUser = Auth::user();
+        $postToUpdate = Vote::firstOrCreate(array('user_id' => $loggedInUser->id, 'post_id' => $request->input('post_id'), 'vote' => $request->input('vote')));
+
+        $postToUpdate->vote = $request->input('vote');
+        $postToUpdate->save();
+
+        return redirect()->action('PostsController@index');
     }
 
     /**
@@ -73,12 +80,7 @@ class VotesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $loggedInUser = Auth::user();
-        $postToUpdate = Vote::firstOrCreate(array('user_id' => $loggedInUser, 'post_id' => $id, 'vote' => $request->input('post_id')));
-        $postToUpdate->vote = $request->input['name'];
-        $postToUpdate->save();
-
-        return redirect()->action('PostsController@index');
+        
     }
 
     /**

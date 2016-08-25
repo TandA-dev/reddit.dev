@@ -29,7 +29,7 @@ Route::get('posts/account', 'PostsController@account');
 Route::get('posts/search_name', 'PostsController@search');
 Route::get('posts/search_title', 'PostsController@search');
 Route::get('posts/show', 'PostsController@show');
-Route::post('votes/', 'VotesController@update');
+Route::post('votes/vote', 'VotesController@store');
 
 Route::resource('posts', 'PostsController');
 

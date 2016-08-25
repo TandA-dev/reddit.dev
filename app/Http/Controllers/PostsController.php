@@ -23,7 +23,7 @@ class PostsController extends Controller
     }
 
     public function index(){
-        $posts = Post::withVotes();
+        $posts = Post::withVotes()->paginate(6);
         $loggedInUser = Auth::user();
 
         return view('posts/index')->with(array('posts' => $posts));
