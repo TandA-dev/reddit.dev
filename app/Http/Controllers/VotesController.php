@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Post;
+use App\Vote;
+use App\User;
 
 class VotesController extends Controller
 {
@@ -37,16 +40,6 @@ class VotesController extends Controller
      */
     public function store(Request $request)
     {
-        $loggedInUser = Auth::user();
-        $vote = new Vote();
-        // $request->input('name') == 'up') {
-        //     $vote->vote += 1;
-        // }
-        // if ($request->input('name') == 'down') {
-        //     $vote->vote += 1;
-        // }
-        
-        $vote->id = $loggedInUser->id;
     }
 
     /**
@@ -80,7 +73,12 @@ class VotesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $loggedInUser = Auth::user();
+        $postToUpdate = Vote::firstOrCreate(array('user_id' => $loggedInUser, 'post_id' => $id, 'vote' => $request->input('post_id')));
+        $postToUpdate->vote = $request->input['name'];
+        $postToUpdate->save();
+
+        return redirect()->action('PostsController@index');
     }
 
     /**

@@ -29,6 +29,7 @@ Route::get('posts/account', 'PostsController@account');
 Route::get('posts/search_name', 'PostsController@search');
 Route::get('posts/search_title', 'PostsController@search');
 Route::get('posts/show', 'PostsController@show');
+Route::post('votes/', 'VotesController@update');
 
 Route::resource('posts', 'PostsController');
 
