@@ -24,15 +24,13 @@ Route::get('/sayhello/{name}', 'HomeController@hello');
 
 Route::get('/rolldice/{guess}', 'HomeController@roll');
 
+Route::post('votes/vote', 'VotesController@store');
 
 Route::get('posts/account', 'PostsController@account');
 Route::get('posts/search_name', 'PostsController@search');
 Route::get('posts/search_title', 'PostsController@search');
 Route::get('posts/show', 'PostsController@show');
-
 Route::resource('posts', 'PostsController');
-
-
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
