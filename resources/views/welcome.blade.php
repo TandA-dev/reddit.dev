@@ -17,6 +17,7 @@
                 display: table;
                 font-weight: 100;
                 font-family: 'Lato';
+                color: #2b2b2b;
             }
 
             .container {
@@ -33,12 +34,19 @@
             .title {
                 font-size: 96px;
             }
+            a{
+              text-decoration: none;
+            }
+            a:visited{
+              text-decoration: none;
+            }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Laravel 5</div>
+                <div class="title"><a href="{{ action('PostsController@index') }}">Login</a></div>
+                <div class="title"><a href="{{ action('Auth\AuthController@getRegister') }}">Create Account</a></div>
             </div>
         </div>
     </body>

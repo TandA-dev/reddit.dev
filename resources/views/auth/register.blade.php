@@ -2,6 +2,7 @@
 
 @section('content')
 
+<h1>Create Account</h1>
 <form class="" action="{{ action('Auth\AuthController@postRegister') }}" method="post">
   {{ csrf_field() }}
   <div class="form-group">
