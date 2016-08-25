@@ -68,7 +68,7 @@ class PostsController extends Controller
     public function account(){
       $loggedInUser = Auth::user();
       $posts = User::find($loggedInUser->id)->posts;
-       return view("/posts/account")->with(array('posts' => $posts));
+       return view("/posts/account")->with(array('posts' => $posts, 'loggedInUser' => $loggedInUser));
     }
 
     public function search(Request $request){

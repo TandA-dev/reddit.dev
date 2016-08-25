@@ -35,6 +35,8 @@ Route::resource('users', 'UsersController');
 
 Route::resource('posts', 'PostsController');
 
+Route::resource('users', 'UsersController');
+
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');

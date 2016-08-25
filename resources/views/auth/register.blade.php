@@ -3,7 +3,9 @@
 @section('content')
 
 <h1>Create Account</h1>
+
 <form action="{{ action('UsersController@store') }}" method="POST">
+
   {!! csrf_field() !!}
   <div class="form-group">
     <label for="name">Name</label>
