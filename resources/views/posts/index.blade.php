@@ -6,7 +6,7 @@
     @foreach ($posts as $post)
 
     <div class="card">
-        <img class="card-img-top" src="{{ $post->img }}" alt="Card image cap">
+        <img class="card-img-top img-responsive" src="{{ $post->img }}" alt="Card image cap">
         <h4 class="card-title title">{{ $post->title }}</h4>
         <div class="card-block">
           <p class="card-text">{{ $post->content }}</p>
