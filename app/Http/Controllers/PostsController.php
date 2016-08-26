@@ -23,9 +23,8 @@ class PostsController extends Controller
     }
 
     public function index(){
-        // $posts = Post::orderedView()->paginate(3);
-        $loggedInUser = Auth::user();
         $posts = Post::withVotes()->paginate(6);
+        $loggedInUser = Auth::user();
         return view('posts/index')->with(array('posts' => $posts));
     }
 

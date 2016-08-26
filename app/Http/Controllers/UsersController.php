@@ -28,7 +28,9 @@ class UsersController extends Controller
      */
     public function create()
     {
+
       return view('auth/register');
+
 
     }
 
@@ -40,6 +42,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+
         $user = new User();
         return $this->validateAndSave($user, $request);
     }
@@ -63,14 +66,16 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-      $user = User::find($id);
-      if($user == NULL) {
-          abort(404);
-      }
-      $data = ['user' => $user];
-      // $message = 'You successfully made your edits!';
-      // $request->session()->flash('successMessage', $message);
-      return view("/users/edit_user", $data);
+
+        $user = User::find($id);
+        if($user == NULL) {
+            abort(404);
+        }
+        $data = ['user' => $user];
+        // $message = 'You successfully made your edits!';
+        // $request->session()->flash('successMessage', $message);
+        return view("/users/edit_user", $data);
+
     }
 
     /**
@@ -104,12 +109,13 @@ class UsersController extends Controller
         if(!$user){
             abort('404'); // send to custom 404 page if not post is not found
         }
-        $user->name = $request->name; //can use $post->title = $request->input('title') alternatively
+
+        $user->name = $request->name; //can use $user->title = $request->input('title') alternatively
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save(); //save when submited
         // Log::info('User successfully creates post', $request->all()); // create custom log when post is created
-        $request->session()->flash('message', 'Post was saved successfully'); // flash success message when saved
+        $request->session()->flash('message', 'User was saved successfully'); // flash success message when saved
         return redirect()->action('PostsController@account'); //redirect to the index page
     }
 }

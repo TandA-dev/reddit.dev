@@ -12,6 +12,7 @@ use App\User;
 use App\Vote;
 
 
+
 class VotesController extends Controller
 {
     /**
@@ -42,14 +43,13 @@ class VotesController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $loggedInUser = Auth::user();
         $postToUpdate = Vote::firstOrCreate(array('user_id' => $loggedInUser->id, 'post_id' => $request->input('post_id'), 'vote' => $request->input('vote')));
 
         $postToUpdate->vote = $request->input('vote');
         $postToUpdate->save();
 
-        return redirect()->action('PostsController@index'); //redirect to the index page
+        return redirect()->action('PostsController@index');
     }
 
     /**
@@ -71,7 +71,7 @@ class VotesController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -83,7 +83,6 @@ class VotesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
 
     }
 

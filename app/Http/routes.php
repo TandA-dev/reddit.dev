@@ -30,6 +30,9 @@ Route::get('posts/account', 'PostsController@account');
 Route::get('posts/search_name', 'PostsController@search');
 Route::get('posts/search_title', 'PostsController@search');
 Route::get('posts/show', 'PostsController@show');
+
+Route::resource('users', 'UsersController');
+
 Route::resource('posts', 'PostsController');
 
 Route::resource('users', 'UsersController');

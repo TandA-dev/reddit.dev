@@ -3,7 +3,9 @@
 @section('content')
 
 <h1>Create Account</h1>
-<form class="" action="{{ action('UsersController@store') }}" method="post">
+
+<form action="{{ action('UsersController@store') }}" method="POST">
+
   {!! csrf_field() !!}
   <div class="form-group">
     <label for="name">Name</label>
@@ -15,9 +17,9 @@
   </div>
   <div class="form-group">
     <label for="password">Password</label>
-    <input type="text" class="form-control" name="password" id="password">
+    <input type="password" class="form-control" name="password" id="password">
   </div>
-  <button type="submit" class="btn btn-primary" name="button">Login</button>
+  <button type="submit" class="btn btn-primary" name="button">Register</button>
 </form>
 
 @stop
