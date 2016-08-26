@@ -4,7 +4,7 @@
 
 <a href="{{ action('UsersController@edit', $loggedInUser->id )}}">Edit User Info</a>
 
-<div class="card-columns">
+  <div class="card-columns">
     @foreach ($posts as $post)
     <div class="card">
       <form class="" action="{{ action('PostsController@destroy', $post->id)}}" method="post">
@@ -22,9 +22,9 @@
           <a href="{{ action('PostsController@edit', $post->id )}}">Edit</a>
           <button type="submit" name="delete">Delete</button>
           </form>
-        </div>
       </div>
-      @endforeach
     </div>
+    @endforeach
+  </div>
 
 @stop
