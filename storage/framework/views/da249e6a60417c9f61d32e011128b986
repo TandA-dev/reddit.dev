@@ -1,0 +1,27 @@
+<?php $__env->startSection('content'); ?>
+
+<form class="" action="<?php echo e(action('UsersController@update', $user->id)); ?>" method="POST">
+  <?php echo csrf_field(); ?>
+
+  <?php echo e(method_field('PUT')); ?>
+
+
+  <div class="form-group">
+     <label for="name">Name</label>
+     <input type="text" class="form-control" id="name" name="name" placeholder="Email" value="<?php echo e($user->name); ?>">
+   </div>
+   <div class="form-group">
+     <label for="email">Email</label>
+     <input type="email" class="form-control" id="email" name="email" placeholder="example@example.com" value="<?php echo e($user->email); ?>">
+   </div>
+   <div class="form-group">
+     <label for="password">Password</label>
+     <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="<?php echo e($user->password); ?>">
+   </div>
+
+   <input class="btn btn-primary" type="submit">
+
+</form>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

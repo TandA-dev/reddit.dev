@@ -1,0 +1,29 @@
+<?php $__env->startSection('content'); ?>
+
+<form method="POST" action="<?php echo e(action('PostsController@update', $post->id)); ?>">
+<?php echo csrf_field(); ?>
+
+<?php echo e(method_field('PUT')); ?>
+
+
+Title: <input type="text" name="title"  value="<?php echo e($post->title); ?>">
+<?php if($errors->has('title')): ?>
+<?php echo $errors->first('title', '<span class="help-block">:message</span>'); ?>
+
+<?php endif; ?>
+
+Content: <input type="text" name="content" value="<?php echo e($post->content); ?>">
+
+URL: <input type="text" name="url" value="<?php echo e($post->url); ?>">
+<?php if($errors->has('url')): ?>
+<?php echo $errors->first('url', '<span class="help-block">:message</span>'); ?>
+
+<?php endif; ?>
+
+</textarea>
+<input type="submit">
+</form>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

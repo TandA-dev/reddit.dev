@@ -1,0 +1,32 @@
+<?php $__env->startSection('content'); ?>
+
+<a href="<?php echo e(action('UsersController@edit', $loggedInUser->id )); ?>">Edit User Info</a>
+
+  <div class="card-columns">
+    <?php foreach($posts as $post): ?>
+    <div class="card">
+      <form class="" action="<?php echo e(action('PostsController@destroy', $post->id)); ?>" method="post">
+
+      <?php echo csrf_field(); ?>
+
+      <?php echo e(method_field('DELETE')); ?>
+
+
+      <h4 class="card-title title"><?php echo e($post->title); ?></h4>
+        <img class="card-img-top" src="<?php echo e($post->img); ?>" alt="Card image cap">
+        <div class="card-block">
+          <p class="card-text"><?php echo e($post->content); ?></p>
+          <p class="card-text url"><small class="text-muted"><?php echo e($post->url); ?></small></p>
+          <p class="card-text time"><small class="text-muted"><?php echo e($post->created_at->setTimezone('America/Chicago')->format('l, F jS Y @ h:i:s A')); ?></small></p>
+          <p class="card-text content">Created by <?php echo e($post->user->name); ?></p>
+          <a href="<?php echo e(action('PostsController@edit', $post->id )); ?>">Edit</a>
+          <button type="submit" name="delete">Delete</button>
+          </form>
+      </div>
+    </div>
+    <?php endforeach; ?>
+  </div>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
